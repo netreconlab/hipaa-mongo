@@ -1,0 +1,11 @@
+*.key
+*.pem
+*.srl
+*.crt
+*.csr
+readme.txt
+ssl-readme.txt
+/1stReconBn/*
+/2dReconBn/*
+/3dReconBn/*
+/4thReconBn/*
