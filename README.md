@@ -1,4 +1,5 @@
-#hipaa_mongodb
+# hipaa_mongodb
+
 Docker file for HIPAA Compliant MongoDB using percona-server-mongodb docker (https://hub.docker.com/r/percona/percona-server-mongodb/). Particulurly enabling ssl, encryption at rest, and auditing. Note that the containers will still need to be stored according HIPAA requirements after setup to maintain compliance. 
 
 **Use at your own risk. There is not promise that this is HIPAA compliant and we are not responsible for any mishandling of your data**
@@ -7,8 +8,8 @@ Before building you will need to setup certificates and keys for each of the ser
 
 Using the naming conventions from the tuturial. Move the files to follow the file structure below:
 
-- ssl
----- rootCA.pem (this only needs to be created once)
+- ssl<br />
+---- rootCA.pem (this only needs to be created once)<br />
 ---- server0
 -------- mongodb.key (new one for each server)
 -------- mongodb.pem (new one for each server)
