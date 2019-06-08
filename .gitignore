@@ -6,7 +6,7 @@
 *.csr
 readme.txt
 ssl-readme.txt
-/ssl/1stReconBn/*
-/ssl/2dReconBn/*
-/ssl/3dReconBn/*
-/ssl/4thReconBn/*
+ssl/1stReconBn
+ssl/2dReconBn
+ssl/3dReconBn
+ssl/4thReconBn
