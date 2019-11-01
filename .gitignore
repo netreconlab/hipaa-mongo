@@ -4,7 +4,7 @@
 *.srl
 *.crt
 *.csr
-readme.txt
+readme.rtf
 ssl-readme.txt
 ssl/1stReconBn
 ssl/2dReconBn
