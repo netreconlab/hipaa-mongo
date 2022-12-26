@@ -5,12 +5,12 @@ LABEL description="HIPAA & GDPR compliant ready Mongo Database with percona-serv
 
 # Set up ssl files and log folder for container
 USER root
-RUN mkdir mongossl mongologs
-RUN chown -R 1001:0 /mongologs /mongossl
+RUN mkdir ssl logs
+RUN chown -R 1001:0 /logs /ssl
 
-#Run on all
+# Add default scripts
 COPY ./scripts/mongo-init.js /docker-entrypoint-initdb.d/
 
 USER 1001
 
-CMD ["mongod", "--logpath", "/mongologs/mongo.log", "--logappend", "--auditDestination=file", "--auditPath", "/mongologs/audit.json"]
+CMD ["mongod", "--logpath", "/mongologs/mongo.log", "--logappend", "--auditDestination=file", "--auditPath", "/logs/audit.json"]

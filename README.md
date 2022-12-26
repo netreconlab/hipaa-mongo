@@ -33,18 +33,18 @@ To build the image:
 
 After a successful build, you can run a ssl enabled container that is HIPAA compliant type:
 
-`docker run --name hipaa-mongodb-container0 -t hipaa-mongodb:latest --sslMode requireSSL --sslPEMKeyFile /mongossl/mongodb.pem --sslCAFile /mongossl/rootCA.pem --enableEncryption --encryptionKeyFile /mongossl/mongodb_encryption.key --replSet rs0 --keyFile /mongossl/mongo_auth.key --logpath /mongologs/mongo.log --logappend --auditDestination=file --auditPath /mongologs/audit.json`
+`docker run --name hipaa-mongodb-container0 -t hipaa-mongodb:latest --sslMode requireSSL --sslPEMKeyFile /ssl/mongodb.pem --sslCAFile /ssl/rootCA.pem --enableEncryption --encryptionKeyFile /ssl/mongodb_encryption.key --replSet rs0 --keyFile /ssl/mongo_auth.key --logpath /logs/mongo.log --logappend --auditDestination=file --auditPath /logs/audit.json`
 
 If you want to persist your data and access the generated logs and audit files, you should volume mount the directories from your host machine. For example, if mongodb was installed on your host machine via brew on macOS and you want to use the mongodb directories. You can start your container with the following command:
 
-`docker run --name hipaa-mongodb-container0 -v /usr/local/var/mongodb:/data/db -v /usr/local/var/log/mongodb:/mongologs -t hipaa-mongodb:latest --sslMode requireSSL --sslPEMKeyFile /mongossl/mongodb.pem --sslCAFile /mongossl/rootCA.pem --enableEncryption --encryptionKeyFile /mongossl/mongodb_encryption.key --keyFile /mongossl/mongo_auth.key --logpath /mongologs/mongo.log --logappend --auditDestination=file --auditPath /mongologs/audit.json`
+`docker run --name hipaa-mongodb-container0 -v /usr/local/var/mongodb:/data/db -v /usr/local/var/log/mongodb:/logs -t hipaa-mongodb:latest --sslMode requireSSL --sslPEMKeyFile /ssl/mongodb.pem --sslCAFile /ssl/rootCA.pem --enableEncryption --encryptionKeyFile /ssl/mongodb_encryption.key --keyFile /ssl/mongo_auth.key --logpath /logs/mongo.log --logappend --auditDestination=file --auditPath /logs/audit.json`
 
 To enable replica sets. You will need to start your intended primary container with '--replSet rs0'. You can learn more about replica sets here, https://docs.mongodb.com/manual/tutorial/deploy-replica-set/. Starting your container will look something like the following:
 
-`docker run --name hipaa-mongodb-container0 -v /usr/local/var/mongodb:/data/db -v /usr/local/var/log/mongodb:/mongologs -t hipaa-mongodb:latest --sslMode requireSSL --sslPEMKeyFile /mongossl/mongodb.pem --sslCAFile /mongossl/rootCA.pem --enableEncryption --encryptionKeyFile /mongossl/mongodb_encryption.key --keyFile /mongossl/mongo_auth.key --logpath /mongologs/mongo.log --logappend --auditDestination=file --auditPath /mongologs/audit.json --replSet rs0`
+`docker run --name hipaa-mongodb-container0 -v /usr/local/var/mongodb:/data/db -v /usr/local/var/log/mongodb:/logs -t hipaa-mongodb:latest --sslMode requireSSL --sslPEMKeyFile /ssl/mongodb.pem --sslCAFile /ssl/rootCA.pem --enableEncryption --encryptionKeyFile /ssl/mongodb_encryption.key --keyFile /ssl/mongo_auth.key --logpath /logs/mongo.log --logappend --auditDestination=file --auditPath /logs/audit.json --replSet rs0`
 
 You can then use `rs.initiate()`, `rs.status()` from the previous tutorial to add replica members. Adterwards, start the new container using the same "replSet" name:
 
-`docker run --name hipaa-mongodb-container1 -v /usr/local/var/mongodb:/data/db -v /usr/local/var/log/mongodb:/mongologs -t hipaa-mongodb:latest --sslMode requireSSL --sslPEMKeyFile /mongossl/mongodb.pem --sslCAFile /mongossl/rootCA.pem --enableEncryption --encryptionKeyFile /mongossl/mongodb_encryption.key --keyFile /mongossl/mongo_auth.key --logpath /mongologs/mongo.log --logappend --auditDestination=file --auditPath /mongologs/audit.json --replSet rs0`
+`docker run --name hipaa-mongodb-container1 -v /usr/local/var/mongodb:/data/db -v /usr/local/var/log/mongodb:/logs -t hipaa-mongodb:latest --sslMode requireSSL --sslPEMKeyFile /ssl/mongodb.pem --sslCAFile /ssl/rootCA.pem --enableEncryption --encryptionKeyFile /ssl/mongodb_encryption.key --keyFile /ssl/mongo_auth.key --logpath /logs/mongo.log --logappend --auditDestination=file --auditPath /logs/audit.json --replSet rs0`
 
 Note that if you use --auth to start your containers, you will need to remove this command during initial syncing of your DB's. You can re-enable -auth after they are synced.  
