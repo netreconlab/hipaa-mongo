@@ -13,4 +13,4 @@ COPY ./scripts/mongo-init.js /docker-entrypoint-initdb.d/
 
 USER 1001
 
-CMD ["mongod", "--logpath", "/mongologs/mongo.log", "--logappend", "--auditDestination=file", "--auditPath", "/logs/audit.json"]
+CMD ["mongod", "--logpath", "/logs/mongo.log", "--logappend", "--auditDestination=file", "--auditPath", "/logs/audit.json"]
