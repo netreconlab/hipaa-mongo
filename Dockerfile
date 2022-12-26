@@ -1,17 +1,13 @@
-FROM percona/percona-server-mongodb:4.2
-MAINTAINER Network Reconnaissance Lab <baker@cs.uky.edu>
+FROM percona/percona-server-mongodb:4.4
+LABEL edu.uky.cs.netrecon.parse-hipaa.vendor="Network Reconnaissance Lab"
+LABEL edu.uky.cs.netrecon.parse-hipaa.authors="baker@cs.uky.edu"
+LABEL description="HIPAA & GDPR compliant ready Mongo Database."
 
-#All arguments
-ARG sslDir
-ARG replicaAuth
-
-#Set up ssl files and log log folder for container
+# Set up ssl files and log folder for container
 USER root
 RUN mkdir mongossl mongologs
-ADD $sslDir /mongossl/
-WORKDIR /mongossl
-COPY $sslDir/../rootCA.pem $sslDir/../mongo_auth.key ./
-RUN chown -R 1001:0 /mongologs mongodb_encryption.key mongo_auth.key
-RUN chmod 400 mongo_auth.key
+RUN chown -R 1001:0 /mongologs /mongossl
 
 USER 1001
+
+CMD ["mongod", "--logpath", "/mongologs/mongo.log", "--logappend", "--auditDestination=file", "--auditPath", "/mongologs/audit.json"]
