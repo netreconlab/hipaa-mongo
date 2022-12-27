@@ -14,7 +14,7 @@ on:
     branches: [ main ]
 
 env:
-  LATEST: '4.4'
+  LATEST: '6.0'
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
@@ -31,7 +31,7 @@ jobs:
       contents: read
       packages: write
 
-    if: github.ref == 'refs/heads/4.4'
+    if: github.ref == 'refs/heads/6.0'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -77,7 +77,7 @@ jobs:
       contents: read
       packages: write
 
-    if: github.ref != 'refs/heads/4.4'
+    if: github.ref != 'refs/heads/6.0'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -111,7 +111,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          platforms: linux/amd64, linux/arm64/v8, linux/ppc64le
+          platforms: linux/amd64, linux/arm64/v8, linux/ppc64le, linux/arm/v6, linux/arm/v7
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -135,7 +135,7 @@ jobs:
           fi
 
       - name: Build Latest Container
-        if: github.ref == 'refs/heads/4.4'
+        if: github.ref == 'refs/heads/6.0'
         env:
           recipe: ${{ matrix.recipe }}
         run: |
