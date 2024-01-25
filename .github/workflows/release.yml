@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '19 4 * * *'
   push:
-    branches: [ main, '4.4', '5.0', '6.0' ]
+    branches: [ main, '4.4', '5.0', '6.0', '7.0' ]
 
 env:
   LATEST: '6.0'
@@ -74,7 +74,7 @@ jobs:
         if: env.BRANCH == env.LATEST
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64, linux/arm64/v8, linux/ppc64le, linux/arm/v6, linux/arm/v7
+          platforms: linux/amd64, linux/arm64/v8
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta-latest.outputs.tags }}
           labels: ${{ steps.meta-latest.outputs.labels }}
