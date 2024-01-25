@@ -1,4 +1,4 @@
-FROM percona/percona-server-mongodb:7.0
+FROM percona/percona-server-mongodb:7.0-multi
 LABEL edu.uky.cs.netrecon.parse-hipaa.vendor="Network Reconnaissance Lab"
 LABEL edu.uky.cs.netrecon.parse-hipaa.authors="baker@cs.uky.edu"
 LABEL description="HIPAA & GDPR compliant ready Mongo Database with percona-server."
