@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '19 4 * * *'
   push:
-    branches: [ main, '4.4', '5.0', '6.0' ]
+    branches: [ main, '4.4', '5.0', '6.0', '7.0' ]
 
 env:
   LATEST: '7.0'
@@ -45,7 +45,7 @@ jobs:
       - name: Extract Docker metadata for latest release
         if: env.BRANCH == env.LATEST
         id: meta-latest
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
@@ -59,7 +59,7 @@ jobs:
       - name: Extract Docker metadata for other releases
         if: env.BRANCH != env.LATEST
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
@@ -72,7 +72,7 @@ jobs:
 
       - name: Build and push Docker image for latest release
         if: env.BRANCH == env.LATEST
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           platforms: linux/amd64, linux/arm64/v8
           push: ${{ github.event_name != 'pull_request' }}
@@ -81,7 +81,7 @@ jobs:
 
       - name: Build and push Docker image for other releases
         if: env.BRANCH != env.LATEST
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           platforms: linux/amd64, linux/arm64/v8
           push: ${{ github.event_name != 'pull_request' }}
