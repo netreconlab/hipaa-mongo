@@ -6,7 +6,7 @@
 
 ---
 
-A simple Mongo image built with [percona-server-mongodb](https://www.percona.com/software/mongodb/percona-server-for-mongodb). Designed for [parse-hipaa](https://github.com/netreconlab/parse-hipaa) but can be used anywhere Mongo is used. These docker images include the necessary database auditing and logging for HIPAA compliance. hipaa-mongo is derived from [percona-server-mongodb](https://hub.docker.com/r/percona/percona-server-mongodb/).
+A simple Mongo image designed for [parse-hipaa](https://github.com/netreconlab/parse-hipaa) but can be used anywhere Mongo is used. These docker images include the necessary database auditing and logging for HIPAA compliance. hipaa-mongo is derived from [percona-server-mongodb](https://hub.docker.com/r/percona/percona-server-mongodb/).
 
 hipaa-mongo provides the following:
 - [x] Auditing & logging
